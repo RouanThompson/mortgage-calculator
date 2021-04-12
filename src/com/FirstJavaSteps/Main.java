@@ -7,32 +7,37 @@ public class Main {
 
     public static void main(String[] args) {
 
-        float   annualInterestRate;
+        final byte MONTHS_IN_YEAR = 12;
+        final byte PERCENT = 100;
+        float   annualInterest;
         byte    period;
         long    principal;
         double  mortgage;
-        float   monthlyRate;
+        float   monthlyInterest;
         int     numberOfPayments;
-        String  result;
+        String  mortgageFormatted;
         Scanner scanner = new Scanner(System.in);
+
+        // Prompts
 
         System.out.print("Principal: ");
         principal = scanner.nextLong();
         System.out.print("Annual Interest Rate: ");
-        annualInterestRate = (float) scanner.nextDouble();
+        annualInterest = scanner.nextFloat();
         System.out.print("Period (Years): ");
         period = scanner.nextByte();
 
         // Calculates mortgage
 
-        monthlyRate = ( annualInterestRate / 100 ) / 12;
-        numberOfPayments = period * 12;
-        mortgage =  ( principal * ( monthlyRate * ( Math.pow( 1 + monthlyRate, numberOfPayments ) /
-                ( Math.pow( 1 + monthlyRate, numberOfPayments ) - 1 ))));
+        monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        numberOfPayments = period * MONTHS_IN_YEAR;
+        mortgage = principal
+                * ( monthlyInterest * Math.pow( 1 + monthlyInterest, numberOfPayments ) /
+                ( Math.pow( 1 + monthlyInterest, numberOfPayments ) - 1 ));
 
-        //
+        // Displays Mortgage
 
-        result = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println("Mortgage: " + result);
+        mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
+        System.out.println("Mortgage: " + mortgageFormatted);
     }
 }
