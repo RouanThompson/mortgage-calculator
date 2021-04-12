@@ -10,7 +10,7 @@ public class Main {
         final byte MONTHS_IN_YEAR = 12;
         final byte PERCENT = 100;
         float   annualInterest;
-        byte    period;
+        byte    years;
         long    principal;
         double  mortgage;
         float   monthlyInterest;
@@ -25,12 +25,12 @@ public class Main {
         System.out.print("Annual Interest Rate: ");
         annualInterest = scanner.nextFloat();
         System.out.print("Period (Years): ");
-        period = scanner.nextByte();
+        years = scanner.nextByte();
 
         // Calculates mortgage
 
         monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
-        numberOfPayments = period * MONTHS_IN_YEAR;
+        numberOfPayments = years * MONTHS_IN_YEAR;
         mortgage = principal
                 * ( monthlyInterest * Math.pow( 1 + monthlyInterest, numberOfPayments ) /
                 ( Math.pow( 1 + monthlyInterest, numberOfPayments ) - 1 ));
